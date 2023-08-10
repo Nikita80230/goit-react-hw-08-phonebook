@@ -13,3 +13,116 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  padding-top: 120px;
+  padding-bottom: 50px;
+}
+
+/* Header Styles */
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem 0;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 1rem;
+}
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+nav a:hover {
+  color: #ffcc00;
+}
+
+nav Link:hover {
+  color: #ffcc00;
+}
+*/
+
+/* Log Out Button Styles */
+.logout button {
+  text-decoration: none;
+  color: #ff5555;
+  font-weight: bold;
+  transition: color 0.3s;
+  border: solid;
+}
+
+.logout button:hover {
+  color: #ff3333;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#contact-form label,
+#contact-list label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input[type='text'],
+input[type='tel'] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+#contact-list ul {
+  list-style-type: none;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #333;
+  color: #fff;
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+}
