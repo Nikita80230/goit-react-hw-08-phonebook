@@ -63,10 +63,6 @@ nav a:hover {
   color: #ffcc00;
 }
 
-nav Link:hover {
-  color: #ffcc00;
-}
-
 /* Log Out Button Styles */
 .logout button {
   text-decoration: none;

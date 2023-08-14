@@ -1,20 +1,37 @@
-import React from 'react'
-import css from "./LoginPage.module.css"
+import React from 'react';
+import css from './LoginPage.module.css';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from 'redux/auth/authOperations';
 
 const LoginPage = () => {
-    return (
-        <div className={css.loginContainer}>
-            <h1>Login</h1>
-            <form>
-                <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" required="" />
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" required="" />
-                <button type="submit">Log In</button>
-            </form>
-        </div>
+  const dispatch = useDispatch();
 
-    )
-}
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget.elements;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    const formData = {
+      email,
+      password,
+    };
+    dispatch(loginThunk(formData));
+    e.currentTarget.reset();
+  };
+
+  return (
+    <div className={css.loginContainer}>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email:</label>
+        <input type="text" id="email" name="email" required />
+        <label htmlFor="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  );
+};
 
 export default LoginPage;

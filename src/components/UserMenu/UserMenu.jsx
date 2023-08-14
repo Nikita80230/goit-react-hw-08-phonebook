@@ -1,12 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutThunk } from 'redux/auth/authOperations';
+import { selectUserData } from 'redux/auth/authSelectors';
 
 const UserMenu = () => {
-    return (
-        <div>
-            <p>mango@mail.com</p>
-            <button>Logout</button>
-        </div>
-    )
-}
+  const dispatch = useDispatch();
+  //   const selectedToken = useSelector(selectToken);
+  const userData = useSelector(selectUserData);
+
+  //   console.log(userData.name);
+  return (
+    <div>
+      <p>{userData.name}</p>
+      <button
+        onClick={() => {
+          dispatch(logoutThunk());
+        }}
+      >
+        Logout
+      </button>
+    </div>
+  );
+};
 
 export default UserMenu;
