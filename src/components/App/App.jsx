@@ -5,20 +5,18 @@ import {
   LOGIN_ROUTE,
   REGISTER_ROUTE,
 } from 'constants/routes';
-import { ContactsPage } from 'pages/ContactsPage/ContactsPage';
-import HomePage from 'pages/HomePage/HomePage';
-import LoginPage from 'pages/LoginPage/LoginPage';
+
 import NotFound from 'pages/NotFound/NotFound';
-import RegisterPage from 'pages/RegisterPage/RegisterPage';
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Route, Routes } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import { reLoginThunk } from 'redux/auth/authOperations';
-import {
-  selectToken,
-  selectIsLoggedIn,
-  // selectUserData,
-} from 'redux/auth/authSelectors';
+import { selectToken, selectIsLoggedIn } from 'redux/auth/authSelectors';
+
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const RegisterPage = lazy(() => import('pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'));
+const ContactsPage = lazy(() => import('pages/ContactsPage/ContactsPage'));
 
 const appRoutes = [
   {
@@ -45,60 +43,46 @@ export const App = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    dispatch(reLoginThunk(token));
-  }, [dispatch, token]);
+    if (!token || isLoggedIn) return;
+    dispatch(reLoginThunk());
+  }, [dispatch, token, isLoggedIn]);
 
   return (
     <div>
       <header>
         <h1>Phonebook</h1>
-
         <nav>
-          <ul>
-            <li>
-              <Link to={HOME_ROUTE}>Home</Link>
-            </li>
-            <li>{!isLoggedIn && <Link to={REGISTER_ROUTE}>Register</Link>}</li>
-            <li>{!isLoggedIn && <Link to={LOGIN_ROUTE}>Login</Link>}</li>
-            <li>
-              <Link to={CONTACTS_ROUTE}>Contacts</Link>
-            </li>
-
-            {isLoggedIn && (
-              <li className="logout">
-                <button>
-                  <UserMenu />
-                </button>
-              </li>
-            )}
-            {/* <li className="logout">
-              <button>
-                <UserMenu userData={userData} />
-              </button>
-            </li> */}
-          </ul>
+          <NavLink to={HOME_ROUTE}>Home</NavLink>
+          {!isLoggedIn ? (
+            <>
+              <NavLink to={REGISTER_ROUTE}>Register</NavLink>
+              <NavLink to={LOGIN_ROUTE}>Login</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to={CONTACTS_ROUTE}>Contacts</NavLink>
+              {isLoggedIn && <UserMenu />}
+            </>
+          )}
         </nav>
       </header>
-      <Routes>
-        {appRoutes.map(route => {
-          return <Route path={route.path} element={<route.element />} />;
-        })}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-
+      <Suspense>
+        <Routes>
+          {appRoutes.map((route, index) => {
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={<route.element />}
+              />
+            );
+          })}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
       <footer>
         <p>© 2023 Phonebook App</p>
       </footer>
     </div>
   );
 };
-
-// {
-//   isLoggedIn && (
-//     <li className="logout">
-//       <button>
-//         <UserMenu userData={userData} />
-//       </button>
-//     </li>
-//   );
-// }

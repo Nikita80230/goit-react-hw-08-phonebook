@@ -22,10 +22,18 @@ code {
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #e6f47a;
   color: #333;
   padding-top: 120px;
   padding-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
 }
 
 /* Header Styles */
@@ -34,13 +42,14 @@ header {
   color: #fff;
   text-align: center;
   padding: 1rem 0;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  height: 115px;
 }
 
-nav ul {
+nav {
   list-style-type: none;
   display: flex;
   justify-content: center;
@@ -48,9 +57,9 @@ nav ul {
   padding: 0;
 }
 
-nav li {
+/* nav li {
   margin: 0 1rem;
-}
+} */
 nav a {
   text-decoration: none;
   color: #fff;
@@ -58,21 +67,38 @@ nav a {
   transition: color 0.3s;
   margin-top: auto;
   margin-bottom: auto;
+  margin: 0 1rem;
+
+  &.active {
+    color: #ffcc00;
+  }
 }
 nav a:hover {
   color: #ffcc00;
 }
 
 /* Log Out Button Styles */
+.logout {
+  background-color: #333;
+  border: none;
+  color: white;
+}
+
 .logout button {
+  /* padding: 0; */
+  background-color: #333;
+  /* color: #fff; */
+  padding: 0.5rem 1rem;
+  cursor: pointer;
   text-decoration: none;
   color: #ff5555;
   font-weight: bold;
   transition: color 0.3s;
   border: solid;
+  border-radius: 3px;
 }
 
-.logout button:hover {
+.logout button :hover {
   color: #ff3333;
 }
 
@@ -90,26 +116,14 @@ main {
 
 input[type='text'],
 input[type='tel'] {
-  width: 100%;
+  /* width: 100%; */
   padding: 0.5rem;
   margin-bottom: 1rem;
 }
 
-button {
-  background-color: #333;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
+/* button:hover {
   background-color: #555;
-}
-
-#contact-list ul {
-  list-style-type: none;
-}
+} */
 
 footer {
   text-align: center;

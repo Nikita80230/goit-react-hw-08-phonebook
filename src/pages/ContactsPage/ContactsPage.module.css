@@ -1,0 +1,9 @@
+.contactSection {
+  & ul {
+    list-style-type: none;
+  }
+  & h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}

@@ -10,7 +10,7 @@ const UserMenu = () => {
 
   //   console.log(userData.name);
   return (
-    <div>
+    <div className="logout">
       <p>{userData.name}</p>
       <button
         onClick={() => {
