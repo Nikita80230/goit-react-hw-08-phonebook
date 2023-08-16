@@ -14,7 +14,7 @@ const NewContactForm = () => {
       name: formElement.name.value,
       number: formElement.number.value,
     };
-    console.log(formData);
+
     dispatch(addContactThunk(formData));
     e.currentTarget.reset();
   };

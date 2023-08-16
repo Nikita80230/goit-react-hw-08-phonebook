@@ -6,6 +6,8 @@ import {
   REGISTER_ROUTE,
 } from 'constants/routes';
 
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
+
 import NotFound from 'pages/NotFound/NotFound';
 import { Suspense, lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,6 +71,19 @@ export const App = () => {
       <Suspense>
         <Routes>
           {appRoutes.map((route, index) => {
+            if (route.path === CONTACTS_ROUTE) {
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <PrivateRoute>
+                      <route.element />
+                    </PrivateRoute>
+                  }
+                />
+              );
+            }
             return (
               <Route
                 key={index}
@@ -81,7 +96,7 @@ export const App = () => {
         </Routes>
       </Suspense>
       <footer>
-        <p>© 2023 Phonebook App</p>
+        <p>© 2023 Phonebook App by Mykyta Bilyi</p>
       </footer>
     </div>
   );
